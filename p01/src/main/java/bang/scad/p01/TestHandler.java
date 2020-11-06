@@ -1,23 +1,61 @@
 package bang.scad.p01;
 
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
+import bang.scad.p01.handlers.interfaces.IHttpInvoker;
 
-import java.util.Map;
+import java.util.DoubleSummaryStatistics;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.List;
+import java.util.ArrayList;
 
-import com.google.gson.Gson;
+public class TestHandler implements Runnable {
 
-public class TestHandler implements RequestHandler<Map<String, String>, String>{
+    private final IHttpInvoker invoker;
+    private final String endpoint;
 
-    @Override
-    public String handleRequest(Map<String, String> input, Context context) {
-        LambdaLogger logger = context.getLogger();
-        logger.log("Super interesting thing has happened!");
-        TestModel model = new TestModel("Samuel", "Bangslund");
-        Gson gson = new Gson();
+    private int count = 100;
+    private SortedSet<Integer> runtimes;
+    private List<String> results;
 
-        return gson.toJson(model);
+    private DoubleSummaryStatistics statistics;
+
+    public TestHandler(IHttpInvoker invoker, String endpoint) {
+        this.endpoint = endpoint;
+        this.invoker = invoker;
+
+        runtimes = new TreeSet<>((e1, e2) -> {
+            return e1 - e2;
+        });
+        results = new ArrayList<>();
     }
     
+    public TestHandler(IHttpInvoker invoker, String url, int count) {
+        this(invoker, url);
+        this.count = count;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < count; i++) {
+            long initTime = System.currentTimeMillis();
+            results.add(invoker.invoke(endpoint));
+            long endTime = System.currentTimeMillis();
+            runtimes.add((int) (endTime - initTime));
+        }
+        this.statistics = computeStatistics();
+    }
+
+    private DoubleSummaryStatistics computeStatistics() {
+        return runtimes.stream()
+            .mapToDouble(x -> x)
+            .summaryStatistics();
+    }
+
+    public List<String> getResults() {
+        return results;
+    }
+
+    public DoubleSummaryStatistics getStatistics() {
+        return statistics;
+    }
 }
