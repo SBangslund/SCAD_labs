@@ -1,4 +1,4 @@
-package bang.scad.p01.handlers;
+package bang.scad.libaws.invokers;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -6,7 +6,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 
-import bang.scad.p01.handlers.interfaces.Invoker;
+import bang.scad.libaws.invokers.interfaces.Invoker;
+
 
 public class HttpInvoker implements Invoker {
 

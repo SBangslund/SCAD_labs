@@ -3,8 +3,8 @@ package bang.scad.p01;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import bang.scad.p01.handlers.AWSInvoker;
-import bang.scad.p01.handlers.interfaces.Invoker;
+import bang.scad.libaws.invokers.AWSInvoker;
+import bang.scad.libaws.invokers.interfaces.Invoker;
 
 public class P01Application {
 

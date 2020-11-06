@@ -1,4 +1,4 @@
-package bang.scad.p01.handlers.interfaces;
+package bang.scad.libaws.invokers.interfaces;
 
 public interface Invoker {
     String invoke(String endpoint);

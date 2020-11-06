@@ -1,5 +1,4 @@
-package bang.scad.p01.handlers;
-
+package bang.scad.libaws.invokers;
 
 import java.nio.charset.StandardCharsets;
 
@@ -13,7 +12,7 @@ import com.amazonaws.services.lambda.AWSLambdaClientBuilder;
 import com.amazonaws.services.lambda.model.InvokeRequest;
 import com.amazonaws.services.lambda.model.InvokeResult;
 
-import bang.scad.p01.handlers.interfaces.Invoker;
+import bang.scad.libaws.invokers.interfaces.Invoker;
 
 public class AWSInvoker implements Invoker {
 

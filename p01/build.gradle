@@ -1,6 +1,7 @@
 plugins {
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
+    id "net.linguica.maven-settings" version "0.5"
 }
 
 group = 'bang.scad'
@@ -9,6 +10,13 @@ sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
+	maven {
+        url 'https://pkgs.dev.azure.com/SurgoStudios/1c39ee61-4490-4aa6-ac62-0113aa493bf9/_packaging/se05/maven/v1'
+		name 'se05'
+		authentication {
+			basic(BasicAuthentication)
+		}
+    }
 }
 
 dependencies {
@@ -17,6 +25,7 @@ dependencies {
 	implementation 'com.amazonaws:aws-java-sdk-core:1.11.895'
 	implementation 'com.amazonaws:aws-java-sdk-lambda:1.11.895'
 	compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+	compile(group: 'bang.scad', name: 'lib-aws', version: '0.0.1b')
 }
 
 test {
