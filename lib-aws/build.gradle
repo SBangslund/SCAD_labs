@@ -1,0 +1,44 @@
+plugins {
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+	id ('maven-publish')
+    id "net.linguica.maven-settings" version "0.5"
+}
+
+group = 'bang.scad'
+version = '0.0.1a'
+sourceCompatibility = '11'
+
+publishing {
+	    publications { 
+        myPublication(MavenPublication) { 
+            groupId 'bang.scad'
+            artifactId 'lib-aws' 
+            version "${version}"
+            artifact "./build/libs/lib-aws-${version}.jar" 
+        } 
+    } 
+    repositories {
+        maven {
+            url 'https://pkgs.dev.azure.com/SurgoStudios/1c39ee61-4490-4aa6-ac62-0113aa493bf9/_packaging/se05/maven/v1'
+			name 'se05'
+			authentication {
+				basic(BasicAuthentication)
+			}
+        }
+    }
+}
+repositories {
+	mavenCentral()
+	maven {
+        url 'https://pkgs.dev.azure.com/SurgoStudios/1c39ee61-4490-4aa6-ac62-0113aa493bf9/_packaging/se05/maven/v1'
+		name 'se05'
+		authentication {
+			basic(BasicAuthentication)
+		}
+    }
+}
+
+dependencies {
+	
+}
