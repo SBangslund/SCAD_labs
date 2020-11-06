@@ -9,6 +9,6 @@ public class E2Handler implements RequestHandler<Map<String, String>, String> {
     
     @Override
     public String handleRequest(Map<String, String> input, Context context) {
-        return "testing";
+        return context.getFunctionName();
     }
 }
