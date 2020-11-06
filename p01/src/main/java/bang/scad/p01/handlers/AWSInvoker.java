@@ -1,5 +1,8 @@
 package bang.scad.p01.handlers;
 
+
+import java.nio.charset.StandardCharsets;
+
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -33,14 +36,16 @@ public class AWSInvoker implements Invoker {
         if (withKeys) {
             credentials = new BasicAWSCredentials(accessKey, secretKey);
         } else {
-            ProfileCredentialsProvider provider = new ProfileCredentialsProvider("vscode_aws");
+            ProfileCredentialsProvider provider = new ProfileCredentialsProvider();
             credentials = provider.getCredentials();
         }
-        AWSLambdaClientBuilder builder = AWSLambdaClientBuilder.standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(Regions.US_EAST_1);
-        AWSLambda client = builder.build();
-        InvokeRequest request = new InvokeRequest().withFunctionName(endpoint);
+        AWSLambda client = AWSLambdaClientBuilder.standard()
+            .withCredentials(new AWSStaticCredentialsProvider(credentials))
+            .withRegion(Regions.US_EAST_1)
+            .build();
+        InvokeRequest request = new InvokeRequest()
+            .withFunctionName(endpoint);
         InvokeResult result = client.invoke(request);
-        return result.toString();
+        return new String(result.getPayload().array(), StandardCharsets.UTF_8);
     }
 }
