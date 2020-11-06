@@ -12,7 +12,7 @@ public class P01Application {
 	public static void main(String[] args) {
 		TestHandler e2Tester = new TestHandler(
 			new HttpInvoker(), 
-			"https://uh3o84erm7.execute-api.us-east-1.amazonaws.com/default/p01_test", 
+			"p01_e2", 
 			10);
 		Thread e2Thread = new Thread(e2Tester);
 		e2Thread.start();

@@ -1,6 +1,6 @@
 package bang.scad.p01;
 
-import bang.scad.p01.handlers.interfaces.IHttpInvoker;
+import bang.scad.p01.handlers.interfaces.Invoker;
 
 import java.util.DoubleSummaryStatistics;
 import java.util.SortedSet;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class TestHandler implements Runnable {
 
-    private final IHttpInvoker invoker;
+    private final Invoker invoker;
     private final String endpoint;
 
     private int count = 100;
@@ -19,7 +19,7 @@ public class TestHandler implements Runnable {
 
     private DoubleSummaryStatistics statistics;
 
-    public TestHandler(IHttpInvoker invoker, String endpoint) {
+    public TestHandler(Invoker invoker, String endpoint) {
         this.endpoint = endpoint;
         this.invoker = invoker;
 
@@ -29,7 +29,7 @@ public class TestHandler implements Runnable {
         results = new ArrayList<>();
     }
     
-    public TestHandler(IHttpInvoker invoker, String url, int count) {
+    public TestHandler(Invoker invoker, String url, int count) {
         this(invoker, url);
         this.count = count;
     }
