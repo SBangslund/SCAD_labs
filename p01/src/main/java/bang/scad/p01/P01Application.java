@@ -11,7 +11,7 @@ public class P01Application {
 
 	public static void main(String[] args) {
 		TestHandler e2Tester = new TestHandler(
-			new AWSInvoker("ASIAZ53XHZ7O75G5V76G", "B+rTGvPxJrdPoQvzsrhC5/MaMxuMzLWeokEsAJMX"), 
+			new AWSInvoker(), 
 			"arn:aws:lambda:us-east-1:682613002205:function:p01_e2", 
 			10);
 		Thread e2Thread = new Thread(e2Tester);
