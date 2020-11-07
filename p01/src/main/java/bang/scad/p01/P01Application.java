@@ -17,18 +17,22 @@ public class P01Application {
 		TestHandler e1Tester = new TestHandler(
 			invoker, 
 			"arn:aws:lambda:us-east-1:682613002205:function:p01_e1", 
+			null,
 			10);
 		TestHandler e2Tester = new TestHandler(
 			invoker, 
 			"arn:aws:lambda:us-east-1:682613002205:function:p01_e2", 
+			null,
 			10);
 		TestHandler e3Tester = new TestHandler(
 			invoker, 
 			"arn:aws:lambda:us-east-1:682613002205:function:p01_e3", 
+			null,
 			10);
 		TestHandler e7Tester = new TestHandler(
 			invoker, 
 			"arn:aws:lambda:us-east-1:682613002205:function:p01_e7", 
+			null,
 			10);
 
 		Thread e1Thread = new Thread(e1Tester);
@@ -49,6 +53,7 @@ public class P01Application {
 			
 			StringBuilder builder = new StringBuilder();			
 			builder.append(String.format("\nTested E1: %s", e1Tester.getStatistics()));
+			builder.append(e1Tester.getResults().get(0));
 			builder.append(String.format("\nTested E2: %s", e2Tester.getStatistics()));
 			builder.append(String.format("\nTested E3: %s", e3Tester.getStatistics()));
 			builder.append(String.format("\nTested E7: %s", e7Tester.getStatistics()));
