@@ -31,6 +31,28 @@ public class AWSInvoker implements Invoker {
 
     @Override
     public String invoke(String endpoint) {
+        return invokeRequest(RequestType.GET, endpoint, null);
+    }
+    
+    @Override
+    public String invoke(String endpoint, String payload) {
+        return invokeRequest(RequestType.POST, endpoint, payload);
+    }
+
+    private InvokeRequest buildRequest(RequestType type, String endpoint, String payload){
+        switch(type) {
+            case GET:
+                return new InvokeRequest()
+                    .withFunctionName(endpoint);
+            case POST:
+                return new InvokeRequest()
+                    .withFunctionName(endpoint)
+                    .withPayload(payload);
+        }
+        return null;
+    }
+
+    private String invokeRequest(RequestType type, String endpoint, String payload) {
         AWSCredentials credentials ;
         if (withKeys) {
             credentials = new BasicAWSCredentials(accessKey, secretKey);
@@ -42,8 +64,7 @@ public class AWSInvoker implements Invoker {
             .withCredentials(new AWSStaticCredentialsProvider(credentials))
             .withRegion(Regions.US_EAST_1)
             .build();
-        InvokeRequest request = new InvokeRequest()
-            .withFunctionName(endpoint);
+        InvokeRequest request = buildRequest(type, endpoint, payload);
         InvokeResult result = client.invoke(request);
         return new String(result.getPayload().array(), StandardCharsets.UTF_8);
     }

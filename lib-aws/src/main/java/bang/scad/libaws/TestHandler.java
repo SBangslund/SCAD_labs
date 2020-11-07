@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class TestHandler implements Runnable {
 
     private final Invoker invoker;
-    private final String endpoint;
+    private final String endpoint, payload;
 
     private int count = 100;
     private SortedSet<Integer> runtimes;
@@ -20,18 +20,18 @@ public class TestHandler implements Runnable {
 
     private DoubleSummaryStatistics statistics;
 
-    public TestHandler(Invoker invoker, String endpoint) {
+    public TestHandler(Invoker invoker, String endpoint, String payload) {
         this.endpoint = endpoint;
         this.invoker = invoker;
-
+        this.payload = payload;
         runtimes = new TreeSet<>((e1, e2) -> {
             return e1 - e2;
         });
         results = new ArrayList<>();
     }
     
-    public TestHandler(Invoker invoker, String url, int count) {
-        this(invoker, url);
+    public TestHandler(Invoker invoker, String endpoint, String payload, int count) {
+        this(invoker, endpoint, payload);
         this.count = count;
     }
 
@@ -39,7 +39,9 @@ public class TestHandler implements Runnable {
     public void run() {
         for (int i = 0; i < count; i++) {
             long initTime = System.currentTimeMillis();
-            results.add(invoker.invoke(endpoint));
+            results.add(payload != null 
+                ? invoker.invoke(endpoint, payload) 
+                : invoker.invoke(endpoint));
             long endTime = System.currentTimeMillis();
             runtimes.add((int) (endTime - initTime));
         }
