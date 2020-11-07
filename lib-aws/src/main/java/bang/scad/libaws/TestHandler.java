@@ -1,4 +1,4 @@
-package bang.scad.p01;
+package bang.scad.libaws;
 
 import java.util.DoubleSummaryStatistics;
 import java.util.SortedSet;
