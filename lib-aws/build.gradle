@@ -49,7 +49,7 @@ dependencies {
 
 jar {
   manifest { 
-    attributes "Main-Class": "bang.scad.p01.P01Application"
+    attributes "Main-Class": "bang.scad.libaws.LibAwsApplication"
   }  
 
   from {
