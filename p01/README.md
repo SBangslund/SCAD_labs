@@ -2,24 +2,31 @@
 By Samuel Bangslund (bangssam@students.zhaw.ch)
 
 ## E1: size of input data
+| size      | min | max  | mean |
+|-----------|-----|------|------|
+| **2.4KB** | 438 | 1614 | 515  |
+| **24KB**  | 434 | 2293 | 512  |
+| **234KB** | 437 | 2302 | 506  |
+| **2.4MB** | 448 | 4935 | 585  |
 
 ## E2: configured memory allocation
 The following data is produced by altering the allocated memory for the AWS lambda function. It varies from 128-2048 and the function does nearly no computation at all (fibonacci to 20). The allocation would presumably be more effective if the function was more computation heavy.
 
 The function is called at each allocation for a 100 times with the following statistics:
-| allocated | min | max  | mean | sum   |
-|-----------|-----|------|------|-------|
-| **128**   | 438 | 1614 | 515  | 20616 |
-| **256**   | 434 | 2293 | 512  | 19472 |
-| **512**   | 437 | 2302 | 506  | 19759 |
-| **1024**  | 448 | 4935 | 585  | 25190 |
-| **2048**  | 441 | 3341 | 535  | 22505 |
+| allocated | min | max  | mean |
+|-----------|-----|------|------|
+| **128**   | 438 | 1614 | 515  |
+| **256**   | 434 | 2293 | 512  |
+| **512**   | 437 | 2302 | 506  |
+| **1024**  | 448 | 4935 | 585  |
+| **2048**  | 441 | 3341 | 535  |
 
 The result would presumably be more clear with an intense memory-algorithm. The time it takes to initially start the function (and its connection) is also slighty varying and can have some influence on the final results.
 
 ## E7: external network calls
+
 ## E8: processor affinity
-Calling the E8 function yields the following system properties:
+Calling the E8 function yields the following system properties (the information is from the container running the lambda function):
 ```json
 {
   "availProc": 2,
@@ -84,8 +91,9 @@ Calling the E8 function yields the following system properties:
   "version": "11.0.8+10-LTS"
 }
 ```
-Which seems sufficfient for now. Calling this 100 times gives the following statistics: 
-| allocated | min | max  | mean | sum   |
-|-----------|-----|------|------|-------|
-|    256    | 435 | 1892 | 522  | 20389 |
+Calling this 100 times gives the following statistics: 
+| allocated | min | max  | mean |
+|-----------|-----|------|------|
+|    256    | 435 | 1892 | 522  |
+Which looks similar to E2.
 
