@@ -26,6 +26,13 @@ The function is called at each allocation for a 100 times with the following sta
 The result would presumably be more clear with an intense memory-algorithm. The time it takes to initially start the function (and its connection) is also slighty varying and can have some influence on the final results.
 
 ## E7: external network calls
+For the external network calls the use of Jsoup is implemented. It allows for parsing a website and search through its DOM. The following is 100 calls made to a function which parses https://en.wikipedia.com's links (or a tags with href attributes):
+
+| website              | min | max  | mean |
+|----------------------|-----|------|------|
+| **en.wikipedia.com** | 617 | 3312 | 720  |
+
+It should be noted, that the runtime is highly dependent on the AWS lambda server's latency to the website. 
 
 ## E8: processor affinity
 Calling the E8 function yields the following system properties (the information is from the container running the lambda function):
