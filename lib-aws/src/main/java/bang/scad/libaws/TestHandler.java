@@ -15,7 +15,7 @@ public class TestHandler implements Runnable {
     private final String endpoint, payload;
 
     private int count = 100;
-    private SortedSet<Integer> runtimes;
+    private List<Integer> runtimes;
     private List<String> results;
 
     private DoubleSummaryStatistics statistics;
@@ -24,9 +24,7 @@ public class TestHandler implements Runnable {
         this.endpoint = endpoint;
         this.invoker = invoker;
         this.payload = payload;
-        runtimes = new TreeSet<>((e1, e2) -> {
-            return e1 - e2;
-        });
+        runtimes = new ArrayList<>();
         results = new ArrayList<>();
     }
     
