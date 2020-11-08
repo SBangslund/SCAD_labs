@@ -1,17 +1,12 @@
 package bang.scad.p01;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import bang.scad.libaws.TestHandler;
 import bang.scad.libaws.invokers.AWSInvoker;
 import bang.scad.libaws.invokers.interfaces.Invoker;
-import bang.scad.libaws.readers.ReadJsonFile;
+import bang.scad.libaws.readers.JsonFileReader;
 import bang.scad.libaws.readers.interfaces.StringReader;
 
 public class P01Application {
@@ -20,9 +15,9 @@ public class P01Application {
 
 	public static void main(String[] args) {
 		Invoker invoker = new AWSInvoker();
-		StringReader reader = new ReadJsonFile();
+		StringReader reader = new JsonFileReader();
 
-		String e1Payload = reader.read("input/test1.json");
+		String e1Payload = reader.read("input/test_2_4.json");
 
 		TestHandler e1Tester = new TestHandler(invoker, "arn:aws:lambda:us-east-1:682613002205:function:p01_e1", e1Payload.toString(), 100);
 		TestHandler e2Tester = new TestHandler(invoker, "arn:aws:lambda:us-east-1:682613002205:function:p01_e2", null, 1);
