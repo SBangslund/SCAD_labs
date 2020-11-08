@@ -8,7 +8,8 @@ The following is a result of running the E1 function 100 times with different in
 | **2.4KB** | 438 | 1614 | 515  |
 | **24KB**  | 546 | 1929 | 582  |
 | **234KB** | 867 | 2218 | 922  |
-| **2.4MB** | 1281 | 2873 | 1381  |
+| **2.4MB** | 1281| 2873 | 1381 |
+
 There is clearly a difference in speed depending on the input size. 
 
 ## E2: configured memory allocation
@@ -104,5 +105,6 @@ Calling this 100 times gives the following statistics:
 | allocated | min | max  | mean |
 |-----------|-----|------|------|
 |    256    | 435 | 1892 | 522  |
+
 Which looks similar to E2.
 
