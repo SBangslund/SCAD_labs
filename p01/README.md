@@ -2,12 +2,14 @@
 By Samuel Bangslund (bangssam@students.zhaw.ch)
 
 ## E1: size of input data
+The following is a result of running the E1 function 100 times with different input sizes (payload):
 | size      | min | max  | mean |
 |-----------|-----|------|------|
 | **2.4KB** | 438 | 1614 | 515  |
-| **24KB**  | 434 | 2293 | 512  |
-| **234KB** | 437 | 2302 | 506  |
-| **2.4MB** | 448 | 4935 | 585  |
+| **24KB**  | 546 | 1929 | 582  |
+| **234KB** | 867 | 2218 | 922  |
+| **2.4MB** | 1281 | 2873 | 1381  |
+There is clearly a difference in speed depending on the input size. 
 
 ## E2: configured memory allocation
 The following data is produced by altering the allocated memory for the AWS lambda function. It varies from 128-2048 and the function does nearly no computation at all (fibonacci to 20). The allocation would presumably be more effective if the function was more computation heavy.

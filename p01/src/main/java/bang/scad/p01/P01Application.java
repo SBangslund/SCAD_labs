@@ -22,7 +22,7 @@ public class P01Application {
 		Invoker invoker = new AWSInvoker();
 		StringReader reader = new ReadJsonFile();
 
-		String e1Payload = reader.read("test1.json");
+		String e1Payload = reader.read("input/test1.json");
 
 		TestHandler e1Tester = new TestHandler(invoker, "arn:aws:lambda:us-east-1:682613002205:function:p01_e1", e1Payload.toString(), 100);
 		TestHandler e2Tester = new TestHandler(invoker, "arn:aws:lambda:us-east-1:682613002205:function:p01_e2", null, 1);
@@ -47,13 +47,10 @@ public class P01Application {
 
 			StringBuilder builder = new StringBuilder();
 			builder.append(String.format("\nTested E1: %s", e1Tester.getStatistics()));
-			//builder.append(e1Tester.getResults().get(0));
 			builder.append(String.format("\nTested E2: %s", e2Tester.getStatistics()));
 			//builder.append(String.format("\nTested E7: %s", e7Tester.getStatistics()));
 			builder.append(String.format("\nTested E8: %s", e8Tester.getStatistics()));
-			builder.append(String.format("\n\t%s", e8Tester.getResults().get(0)));
-
-			// e2Tester.getResults().stream().forEach(r -> builder.append("\t" + r + "\n"));
+			
 			LOGGER.log(Level.INFO, builder.toString());
 		} catch (InterruptedException e) {
 			LOGGER.log(Level.WARNING, "Thread was interrupted", e);
